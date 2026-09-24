@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ra-excel-assurance"
+version = "0.1.0"
+description = "Dependency-light Excel workbook QA auditor for operational reporting."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+ra-excel-audit = "ra_excel_assurance.cli:main"
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ra_excel_assurance*"]
