@@ -21,7 +21,8 @@ def build_parser() -> ArgumentParser:
     parser.add_argument("--config", help="JSON config with required columns")
     parser.add_argument("--report", help="Text report path")
     parser.add_argument("--json-report", help="JSON report path")
-    parser.add_argument("--corrected", help="Safe review-copy path")
+    parser.add_argument("--review-copy", dest="review_copy", help="Safe review-copy path")
+    parser.add_argument("--corrected", dest="review_copy", help="Deprecated alias for --review-copy")
     return parser
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
@@ -35,17 +36,17 @@ def main(argv: list[str] | None = None) -> int:
         if args.json_report
         else output_dir / "report.json"
     )
-    corrected_path = (
-        Path(args.corrected)
-        if args.corrected
-        else output_dir / "corrected.xlsx"
+    review_copy_path = (
+        Path(args.review_copy)
+        if args.review_copy
+        else output_dir / "review_copy.xlsx"
     )
 
     config = AuditConfig.from_json(args.config)
     result = audit_workbook(source, config)
     write_report_text(result, report_path)
     write_report_json(result, json_path)
-    digest = create_safe_copy(source, corrected_path)
+    digest = create_safe_copy(source, review_copy_path)
     print("RA Excel Assurance Engine v0.1")
     print(f"Workbook: {source}")
     print(f"Issues: {len(result.issues)}")
@@ -53,7 +54,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"  {category}: {count}")
     print(f"Report: {report_path}")
     print(f"JSON: {json_path}")
-    print(f"Corrected review copy: {corrected_path}")
+    print(f"Review copy: {review_copy_path}")
     print(f"Safe-copy SHA256: {digest}")
     return 0
 
