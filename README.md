@@ -10,13 +10,15 @@ A lightweight, dependency-free quality assurance tool for `.xlsx` workbooks used
 4. Hidden or very-hidden worksheets.
 5. Formulas that reference worksheets that do not exist in the workbook.
 
-The engine reads the workbook's OOXML structure directly. It does not require Excel, LibreOffice, openpyxl or pandas.
+The engine reads the workbook's OOXML structure directly using Python's standard library (`zipfile` + `xml.etree.ElementTree`). It does not require Excel, LibreOffice, openpyxl or pandas.
 
 ## Why this project exists
 
-Operational spreadsheets often become business-critical before anyone adds formal QA. This tool creates a repeatable review step before a workbook is used for reporting or handoff.## Verified v0.1 status
+Operational spreadsheets often become business-critical before anyone adds formal QA. This tool creates a repeatable review step before a workbook is used for reporting or handoff.
 
-The included validation suite currently passes **5/5 tests**.
+## Verified v0.1 status
+
+The included validation suite currently passes **5/5 tests**. The unit suite is written with Python's built-in `unittest` framework and is executed by `scripts/run_validation.py`.
 
 Three generated sample workbooks are exercised end-to-end:
 
@@ -24,7 +26,9 @@ Three generated sample workbooks are exercised end-to-end:
 - `clean.xlsx`: 0 findings.
 - `quoted_refs.xlsx`: 1 expected required-column finding while a quoted sheet reference remains valid.
 
-The full validation transcript is stored in `docs/validation.txt`.
+The full validation transcript is stored in [`docs/validation.txt`](docs/validation.txt).
+
+CI reruns the same validation suite on every push and pull request via [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
 
 ## Run it
 
@@ -34,9 +38,11 @@ Default outputs are written beside the source workbook under `output/`:
 
 - `report.txt`
 - `report.json`
-- `corrected.xlsx`## Important v0.1 safety behavior
+- `review_copy.xlsx`
 
-The file named `corrected.xlsx` is intentionally a **byte-identical review copy** in v0.1.
+## Important v0.1 safety behavior
+
+The file named `review_copy.xlsx` is intentionally a **byte-identical review copy** in v0.1.
 
 The engine does not silently delete duplicate rows, fill missing values, unhide sheets or rewrite formulas. Those actions require business context and could corrupt legitimate data.
 
@@ -56,7 +62,8 @@ Example:
 
 - `ra_excel_assurance/` — OOXML reader, audit logic and CLI.
 - `tests/` — unit and end-to-end tests.
-- `scripts/generate_samples.py` — builds deterministic sample workbooks.- `scripts/run_validation.py` — runs the full proof suite and writes the transcript.
+- `scripts/generate_samples.py` — builds deterministic sample workbooks.
+- `scripts/run_validation.py` — runs the full proof suite and writes the transcript.
 - `samples/` — reproducible workbook fixtures.
 - `docs/validation.txt` — latest verified execution evidence.
 
