@@ -1,16 +1,16 @@
 === UNIT TESTS ===
 RA Excel Assurance Engine v0.1
-Workbook: <TEMP>\tmpl35d2f27\issue_rich.xlsx
+Workbook: <TEMP>\tmp6sg0hosn\issue_rich.xlsx
 Issues: 6
   BLANK_REQUIRED: 1
   DUPLICATE_ROW: 1
   ERROR_VALUE: 1
   HIDDEN_SHEET: 1
   MISSING_SHEET_REFERENCE: 2
-Report: <TEMP>\tmpl35d2f27\output\report.txt
-JSON: <TEMP>\tmpl35d2f27\output\report.json
-Corrected review copy: <TEMP>\tmpl35d2f27\output\corrected.xlsx
-Safe-copy SHA256: f6133f15e560da66c426abd46e8c9e223342edab060ac2735f302d3c1cf84f46
+Report: <TEMP>\tmp6sg0hosn\output\report.txt
+JSON: <TEMP>\tmp6sg0hosn\output\report.json
+Review copy: <TEMP>\tmp6sg0hosn\output\review_copy.xlsx
+Safe-copy SHA256: cf66d4a36cc4c480a70872021c1bcd1ced09be992659d16a9eef9a6921febc37
 test_clean_workbook_has_no_issues (test_auditor.ExcelAssuranceTests.test_clean_workbook_has_no_issues) ... ok
 test_cli_creates_reports_and_review_copy (test_auditor.ExcelAssuranceTests.test_cli_creates_reports_and_review_copy) ... ok
 test_issue_rich_workbook_hits_all_five_checks (test_auditor.ExcelAssuranceTests.test_issue_rich_workbook_hits_all_five_checks) ... ok
@@ -18,7 +18,7 @@ test_quoted_sheet_reference_is_valid (test_auditor.ExcelAssuranceTests.test_quot
 test_safe_copy_is_byte_identical (test_auditor.ExcelAssuranceTests.test_safe_copy_is_byte_identical) ... ok
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.096s
+Ran 5 tests in 0.056s
 
 OK
 EXIT_CODE=0
@@ -34,7 +34,7 @@ Issues: 6
   MISSING_SHEET_REFERENCE: 2
 Report: samples\results\issue_rich_report.txt
 JSON: samples\results\issue_rich_report.json
-Corrected review copy: samples\results\issue_rich_corrected.xlsx
+Review copy: samples\results\issue_rich_review_copy.xlsx
 Safe-copy SHA256: 5f30aa2dd647324cc8953349cf5612f252497a229f9bbcc3cdc7c10774477c68
 EXIT_CODE=0
 
@@ -44,7 +44,7 @@ Workbook: samples\clean.xlsx
 Issues: 0
 Report: samples\results\clean_report.txt
 JSON: samples\results\clean_report.json
-Corrected review copy: samples\results\clean_corrected.xlsx
+Review copy: samples\results\clean_review_copy.xlsx
 Safe-copy SHA256: 4efdc6abcc68649548a5852057cfd0368097a3dbd7d44605b93524a56dd449d5
 EXIT_CODE=0
 
@@ -55,7 +55,7 @@ Issues: 1
   BLANK_REQUIRED: 1
 Report: samples\results\quoted_refs_report.txt
 JSON: samples\results\quoted_refs_report.json
-Corrected review copy: samples\results\quoted_refs_corrected.xlsx
+Review copy: samples\results\quoted_refs_review_copy.xlsx
 Safe-copy SHA256: 9a89ede6caccd9a42bd8c315165e3f2cd05fb588498e413c35e458a613cd5df9
 EXIT_CODE=0
 
